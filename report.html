@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="data:image/png;base64,">
+
+<title>HTML Title Here</title>
+<style>
+	body{
+		margin:1em auto;
+		max-width:43em;
+		padding:0 .62em;
+		font:1.2em/1.62 sans-serif;
+        color:#333333;
+	}
+	h1 {line-height:1.0; margin-left: 0em; font-size: 48px; text-align: center;}
+    h2 {line-height:1.2; margin-left: 0em; font-size: 32px;}
+    h3 {line-height:1.2; margin-left: 1em;}
+    p {margin-left: 2em; margin-right: 1em; text-indent: 0em;}
+    aside {text-align: center;}
+    pre {
+        margin-left: 1em;
+        background: #f4f4f4;
+        border: 1px solid #ddd;
+        border-left: 3px solid #f36d33;
+        color: #333333;
+        page-break-inside: avoid;
+        font-family: monospace;
+        font-style: normal;
+        font-size: 14px;
+        line-height: 1.2;
+        margin-bottom: 1.6em;
+        margin-left: 2em;
+        max-width: 52em;
+        overflow: hidden;
+        padding: 1em 1.5em;
+        display: block;
+        word-wrap: break-word;
+        letter-spacing: -0.5;
+    }
+    hr {
+        background-color: #ccc;
+        height: 1px;
+        border: none;
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+    table {
+        border-collapse: collapse;
+        max-width: 40em;
+        margin-left: 1.7em;
+        margin-right: 1em;
+    }
+    th, td {
+        text-align: left;
+        margin-left: 2em;
+        margin-right: 2em;
+        margin-bottom: 2em;
+        border: 1px solid #f4f4f4;
+        padding: 2px;
+        padding-left: 15px;
+        background-color: #f4f4f4;
+    }
+    th {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapsible {
+        background-color: #eee;
+        color: #333;
+        cursor: pointer;
+        padding: 18px;
+        width: 48.1em;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 16px;
+        margin-left: 2em;
+    }
+
+    .active, .collapsible:hover {
+        background-color: #ccc;
+    }
+
+    .collapsible:after {
+        content: '\002B';
+        color: #333;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        margin-top: 0px;
+    }
+
+    .active:after {
+        content: "\2212";
+    }
+
+    .content {
+        padding: 0 0px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        background-color: #f1f1f1;
+        width: 40.1em;
+        margin-left: 1.65em;
+    }
+    .wrapper {
+        display: grid;
+        grid-template-columns: 20em 20em 20em;
+    }
+    .wrapper item {
+        margin: 1em;
+    }
+
+    .card{position:relative;display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem}.card>hr{margin-right:0;margin-left:0}.card>.list-group:first-child .list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}.card>.list-group:last-child .list-group-item:last-child{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}.card-body{-ms-flex:1 1 auto;flex:1 1 auto;min-height:1px;padding:1.25rem}.card-title{margin-bottom:.75rem}.card-subtitle{margin-top:-.375rem;margin-bottom:0}.card-text:last-child{margin-bottom:0}.card-link:hover{text-decoration:none}.card-link+.card-link{margin-left:1.25rem}.card-header{padding:.75rem 1.25rem;margin-bottom:0;background-color:rgba(0,0,0,.03);border-bottom:1px solid rgba(0,0,0,.125)}.card-header:first-child{border-radius:calc(.25rem - 1px) calc(.25rem - 1px) 0 0}.card-header+.list-group .list-group-item:first-child{border-top:0}.card-footer{padding:.75rem 1.25rem;background-color:rgba(0,0,0,.03);border-top:1px solid rgba(0,0,0,.125)}.card-footer:last-child{border-radius:0 0 calc(.25rem - 1px) calc(.25rem - 1px)}.card-header-tabs{margin-right:-.625rem;margin-bottom:-.75rem;margin-left:-.625rem;border-bottom:0}.card-header-pills{margin-right:-.625rem;margin-left:-.625rem}.card-img-overlay{position:absolute;top:0;right:0;bottom:0;left:0;padding:1.25rem}.card-img,.card-img-bottom,.card-img-top{-ms-flex-negative:0;flex-shrink:0;width:100%}.card-img,.card-img-top{border-top-left-radius:calc(.25rem - 1px);border-top-right-radius:calc(.25rem - 1px)}.card-img,.card-img-bottom{border-bottom-right-radius:calc(.25rem - 1px);border-bottom-left-radius:calc(.25rem - 1px)}.card-deck .card{margin-bottom:15px}@media (min-width:576px){.card-deck{display:-ms-flexbox;display:flex;-ms-flex-flow:row wrap;flex-flow:row wrap;margin-right:-15px;margin-left:-15px}.card-deck .card{-ms-flex:1 0 0%;flex:1 0 0%;margin-right:15px;margin-bottom:0;margin-left:15px}}.card-group>.card{margin-bottom:15px}@media (min-width:576px){.card-group{display:-ms-flexbox;display:flex;-ms-flex-flow:row wrap;flex-flow:row wrap}.card-group>.card{-ms-flex:1 0 0%;flex:1 0 0%;margin-bottom:0}.card-group>.card+.card{margin-left:0;border-left:0}.card-group>.card:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.card-group>.card:not(:last-child) .card-header,.card-group>.card:not(:last-child) .card-img-top{border-top-right-radius:0}.card-group>.card:not(:last-child) .card-footer,.card-group>.card:not(:last-child) .card-img-bottom{border-bottom-right-radius:0}.card-group>.card:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.card-group>.card:not(:first-child) .card-header,.card-group>.card:not(:first-child) .card-img-top{border-top-left-radius:0}.card-group>.card:not(:first-child) .card-footer,.card-group>.card:not(:first-child) .card-img-bottom{border-bottom-left-radius:0}}.card-columns .card{margin-bottom:.75rem}@media (min-width:576px){.card-columns{-webkit-column-count:3;-moz-column-count:3;column-count:3;-webkit-column-gap:1.25rem;-moz-column-gap:1.25rem;column-gap:1.25rem;orphans:1;widows:1}.card-columns .card{display:inline-block;width:100%}}.accordion>.card{overflow:hidden}.accordion>.card:not(:last-of-type){border-bottom:0;border-bottom-right-radius:0;border-bottom-left-radius:0}.accordion>.card:not(:first-of-type){border-top-left-radius:0;border-top-right-radius:0}.accordion>.card>.card-header{border-radius:0;margin-bottom:-1px}
+    .card{font-weight:400;border:0;-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)}.card[class*="border"]{border:1px solid #9e9e9e;-webkit-box-shadow:none;box-shadow:none}.card .card-body h1,.card .card-body h2,.card .card-body .card .card-body h4,.card .card-body h5,.card .card-body h6{font-weight:400}.card .card-body .card-title a{-webkit-transition:0.2s ease-in-out;transition:0.2s ease-in-out}.card .card-body .card-title a:hover{-webkit-transition:0.2s ease-in-out;transition:0.2s ease-in-out}.card .card-body .card-text{font-size:.9rem;font-weight:400;color:#747373}.card .md-form label{font-weight:300}
+
+    .card2 {
+        width:80%;
+        max-width:400px;
+        box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+    }
+    .container {
+        margin: 1em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+
+    @media print{
+		body{
+			max-width:none
+		}
+	}
+</style>
+
+<article>
+<h1>Title Here</h1>
+<p></p>
+<hr>
+<p></p>
+<h2>Executive Summary</h2>
+<h3>Infection Methods</h3>
+<p>Description here.</p>
+<p></p>
+<h3>Persistence</h3>
+<p>Description here.</p>
+<p></p>
+<h3>Key Behavior</h3>
+<p>Description here.</p>
+<p></p>
+<h3>Removal</h3>
+<p>Description here.</p>
+<p></p>
+<hr>
+<p></p>
+<h2>Basic Info</h2>
+<p></p>
+<p>Description here.</p>
+<p></p>
+<h3>File Information</h3>
+<p></p>
+<p>$fileinfo$</p>
+<p></p>
+<p>Description here.</p>
+<p></p>
+<hr>
+<p></p>
+<h2>Analysis</h2>
+<h3>Infection Method</h3>
+<p>Description goes here.</p>
+<pre><code><span style="color: darkgreen;">0x004008ed</span> const char *format 
+<span style="color: darkgreen;">0x004008ed</span> <span style="color: red;">str.Verify_yourself:</span> 
+<span style="color: darkgreen;">0x004008f7</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.printf</b></span> 
+<span style="color: darkgreen;">0x00602090</span> [<span style="color: red;">26</span>] -rw- section size <span style="color: darkyellow;">32</span> named .bss 
+<span style="color: darkgreen;">0x00400903</span> FILE *str<span style="color: darkyellow;">ea</span>m 
+<span style="color: darkgreen;">0x00400906</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.fflush</b></span> 
+<span style="color: darkgreen;">0x0040090b</span> FILE *str<span style="color: darkyellow;">ea</span>m 
+<span style="color: darkgreen;">0x0040090b</span> obj.stdin__GLI<span style="color: darkyellow;">BC</span>_2.2.5 
+<span style="color: darkgreen;">0x00400916</span> <span style="color: blue;">int</span> size 
+<span style="color: darkgreen;">0x0040091b</span> char *s 
+<span style="color: darkgreen;">0x0040091e</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.fgets</b></span> 
+<span style="color: darkgreen;">0x00400928</span> const char *s 
+<span style="color: darkgreen;">0x00400928</span> <span style="color: red;">str.Verification_rejected</span> 
+<span style="color: darkgreen;">0x0040092d</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.puts</b></span> 
+<span style="color: darkgreen;">0x00400940</span> const char *s 
+<span style="color: darkgreen;">0x00400943</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.strlen</b></span> 
+<span style="color: darkgreen;">0x0040095c</span> const char *s 
+<span style="color: darkgreen;">0x0040095c</span> <span style="color: red;">str.Verification_rejected</span> 
+<span style="color: darkgreen;">0x00400961</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.puts</b></span> 
+<span style="color: darkgreen;">0x00400990</span> size_t size 
+<span style="color: darkgreen;">0x00400993</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.malloc</b></span> 
+<span style="color: darkgreen;">0x004009ad</span> size_t n 
+<span style="color: darkgreen;">0x004009b4</span> <span style="color: blue;">int</span> c 
+<span style="color: darkgreen;">0x004009b9</span> void *s 
+<span style="color: darkgreen;">0x004009bc</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.memset</b></span> 
+ 
+</code></pre>
+<p></p>
+<h3>Persistence</h3>
+<p>Description goes here.</p>
+<pre><code>             
+┌ <span style="color: darkyellow;">41</span>0: <span style="color: blue;">int</span> main (int argc, char **argv, char **envp) 
+│           <span style="color: darkgreen;">0x004008d6</span>      <span style="color: darkyellow;">55</span>             push <span style="color: blue;">rbp</span> 
+│           <span style="color: darkgreen;">0x004008d7</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">89</span><span style="color: darkyellow;">e5</span>         <span style="color: blue;">mov</span> <span style="color: blue;">rbp</span>, <span style="color: blue;">rsp</span> 
+│           <span style="color: darkgreen;">0x004008da</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">83</span><span style="color: darkyellow;">ec</span><span style="color: darkyellow;">50</span>       <span style="color: blue;">sub</span> <span style="color: blue;">rsp</span>, <span style="color: darkgreen;">0x50</span> 
+│           <span style="color: darkgreen;">0x004008de</span>      <span style="color: darkyellow;">64</span><span style="color: darkyellow;">48</span><span style="color: darkyellow;">8b</span><span style="color: darkyellow;">04</span><span style="color: darkyellow;">25</span><span style="color: darkyellow;">28</span>.  <span style="color: blue;">mov</span> <span style="color: blue;">rax</span>, qword fs:[0x<span style="color: darkyellow;">28</span>] 
+│           <span style="color: darkgreen;">0x004008e7</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">89</span><span style="color: darkyellow;">45</span><span style="color: darkyellow;">f8</span>       <span style="color: blue;">mov</span> qword [canary], <span style="color: blue;">rax</span> 
+│           <span style="color: darkgreen;">0x004008eb</span>      <span style="color: darkyellow;">31</span><span style="color: darkyellow;">c0</span>           <span style="color: blue;">xor</span> <span style="color: blue;">eax</span>, <span style="color: blue;">eax</span> 
+│           <span style="color: darkgreen;">0x004008ed</span>      <span style="color: darkyellow;">bf</span><span style="color: darkyellow;">78</span><span style="color: darkyellow;">0c</span><span style="color: darkyellow;">40</span><span style="color: darkyellow;">00</span>     <span style="color: blue;">mov</span> <span style="color: blue;">edi</span>, <span style="color: red;">str.Verify_yourself:</span>  
+│           <span style="color: darkgreen;">0x004008f2</span>      <span style="color: darkyellow;">b8</span><span style="color: darkyellow;">00</span><span style="color: darkyellow;">00</span><span style="color: darkyellow;">00</span><span style="color: darkyellow;">00</span>     <span style="color: blue;">mov</span> <span style="color: blue;">eax</span>, 0 
+│           <span style="color: darkgreen;">0x004008f7</span>      <span style="color: darkyellow;">e8</span><span style="color: darkyellow;">44</span><span style="color: darkyellow;">fe</span><span style="color: darkyellow;">ff</span><span style="color: darkyellow;">ff</span>     <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.printf</b></span>          
+│           <span style="color: darkgreen;">0x004008fc</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">8b</span><span style="color: darkyellow;">05</span><span style="color: darkyellow;">8d</span><span style="color: darkyellow;">17</span><span style="color: darkyellow;">20</span>.  <span style="color: blue;">mov</span> <span style="color: blue;">rax</span>, qword [<span style="color: red;">obj.stdout</span>]  
+│                                                                       
+│           <span style="color: darkgreen;">0x00400903</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">89</span><span style="color: darkyellow;">c7</span>         <span style="color: blue;">mov</span> <span style="color: blue;">rdi</span>, <span style="color: blue;">rax</span>                 
+│           <span style="color: darkgreen;">0x00400906</span>      <span style="color: darkyellow;">e8</span><span style="color: darkyellow;">a5</span><span style="color: darkyellow;">fe</span><span style="color: darkyellow;">ff</span><span style="color: darkyellow;">ff</span>     <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.fflush</b></span>          
+│           <span style="color: darkgreen;">0x0040090b</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">8b</span><span style="color: darkyellow;">15</span><span style="color: darkyellow;">8e</span><span style="color: darkyellow;">17</span><span style="color: darkyellow;">20</span>.  <span style="color: blue;">mov</span> <span style="color: blue;">rdx</span>, qword [<span style="color: red;">obj.stdin</span>]   
+│                                                                       
+│           <span style="color: darkgreen;">0x00400912</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">8d</span><span style="color: darkyellow;">45</span><span style="color: darkyellow;">d0</span>       <span style="color: blue;">lea</span> <span style="color: blue;">rax</span>, <span style="color: blue;">[s]</span> 
+│           <span style="color: darkgreen;">0x00400916</span>      <span style="color: darkyellow;">be</span><span style="color: darkyellow;">20</span><span style="color: darkyellow;">00</span><span style="color: darkyellow;">00</span><span style="color: darkyellow;">00</span>     <span style="color: blue;">mov</span> <span style="color: blue;">esi</span>, <span style="color: darkgreen;">0x20</span>                
+│           <span style="color: darkgreen;">0x0040091b</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">89</span><span style="color: darkyellow;">c7</span>         <span style="color: blue;">mov</span> <span style="color: blue;">rdi</span>, <span style="color: blue;">rax</span>                 
+│           <span style="color: darkgreen;">0x0040091e</span>      <span style="color: darkyellow;">e8</span><span style="color: darkyellow;">5d</span><span style="color: darkyellow;">fe</span><span style="color: darkyellow;">ff</span><span style="color: darkyellow;">ff</span>     <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.fgets</b></span>           
+│           <span style="color: darkgreen;">0x00400923</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">85</span><span style="color: darkyellow;">c0</span>         test <span style="color: blue;">rax</span>, <span style="color: blue;">rax</span> 
+│       <span style="color: blue;">┌─<</span> <span style="color: darkgreen;">0x00400926</span>      <span style="color: darkyellow;">75</span><span style="color: darkyellow;">14</span>           <span style="color: blue;">jne</span> <span style="color: darkgreen;">0x40093c</span> 
+│       │   <span style="color: darkgreen;">0x00400928</span>      <span style="color: darkyellow;">bf</span><span style="color: darkyellow;">8a</span><span style="color: darkyellow;">0c</span><span style="color: darkyellow;">40</span><span style="color: darkyellow;">00</span>     <span style="color: blue;">mov</span> <span style="color: blue;">edi</span>, <span style="color: red;">str.Verification_rejected</span>  
+│       │   <span style="color: darkgreen;">0x0040092d</span>      <span style="color: darkyellow;">e8</span><span style="color: darkyellow;">de</span><span style="color: darkyellow;">fd</span><span style="color: darkyellow;">ff</span><span style="color: darkyellow;">ff</span>     <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.puts</b></span>            
+│       │   <span style="color: darkgreen;">0x00400932</span>      <span style="color: darkyellow;">b8</span><span style="color: darkyellow;">00</span><span style="color: darkyellow;">00</span><span style="color: darkyellow;">00</span><span style="color: darkyellow;">00</span>     <span style="color: blue;">mov</span> <span style="color: blue;">eax</span>, 0 
+│      ┌──< <span style="color: darkgreen;">0x00400937</span>      <span style="color: darkyellow;">e9</span><span style="color: darkyellow;">1e</span><span style="color: darkyellow;">01</span><span style="color: darkyellow;">00</span><span style="color: darkyellow;">00</span>     <span style="color: blue;">jmp</span> <span style="color: darkgreen;">0x400a5a</span> 
+│      ││    
+│      │└─> <span style="color: darkgreen;">0x0040093c</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">8d</span><span style="color: darkyellow;">45</span><span style="color: darkyellow;">d0</span>       <span style="color: blue;">lea</span> <span style="color: blue;">rax</span>, <span style="color: blue;">[s]</span> 
+│      │    <span style="color: darkgreen;">0x00400940</span>      <span style="color: darkyellow;">48</span><span style="color: darkyellow;">89</span><span style="color: darkyellow;">c7</span>         <span style="color: blue;">mov</span> <span style="color: blue;">rdi</span>, <span style="color: blue;">rax</span>                 
+│      │    <span style="color: darkgreen;">0x00400943</span>      <span style="color: darkyellow;">e8</span><span style="color: darkyellow;">d8</span><span style="color: darkyellow;">fd</span><span style="color: darkyellow;">ff</span><span style="color: darkyellow;">ff</span>     <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.strlen</b></span>          
+│      │    <span style="color: darkgreen;">0x00400948</span>      <span style="color: darkyellow;">89</span><span style="color: darkyellow;">45</span><span style="color: darkyellow;">c0</span>         <span style="color: blue;">mov</span> dword [var_40h], <span style="color: blue;">eax</span> 
+│      │    <span style="color: darkgreen;">0x0040094b</span>      <span style="color: darkyellow;">8b</span><span style="color: darkyellow;">45</span><span style="color: darkyellow;">c0</span>         <span style="color: blue;">mov</span> <span style="color: blue;">eax</span>, dword [<span style="color: red;">var_40h</span>] 
+│      │    <span style="color: darkgreen;">0x0040094e</span>      <span style="color: darkyellow;">83</span><span style="color: darkyellow;">e8</span><span style="color: darkyellow;">01</span>         <span style="color: blue;">sub</span> <span style="color: blue;">eax</span>, 1 
+│      │    <span style="color: darkgreen;">0x00400951</span>      <span style="color: darkyellow;">89</span><span style="color: darkyellow;">c0</span>           <span style="color: blue;">mov</span> <span style="color: blue;">eax</span>, <span style="color: blue;">eax</span> 
+ 
+</code></pre>
+<pre><code> 
+// size_t 
+ 
+un<span style="color: darkyellow;">de</span>fine<span style="color: darkyellow;">d8</span> main(void) 
+{ 
+    int32_t iVar1 
+    int32_t iVar2 
+    int64_t iVar3 
+    un<span style="color: darkyellow;">de</span>fine<span style="color: darkyellow;">d8</span> uVar4 
+    char *arg2 
+    int64_t in_FS_OFFSET 
+    uint<span style="color: darkyellow;">32</span>_t var_<span style="color: darkyellow;">44</span>h 
+    un<span style="color: darkyellow;">de</span>fine<span style="color: darkyellow;">d8</span> var_<span style="color: darkyellow;">40</span>h 
+    char *s 
+    int64_t <span style="color: darkyellow;">ca</span>nary 
+     
+    <span style="color: darkyellow;">ca</span>nary = *(int64_t *)(in_FS_O<span style="color: darkyellow;">FF</span>SET + <span style="color: darkgreen;">0x28)</span> 
+    sym.imp.printf("Verify yourself: ") 
+    sym.imp.<span style="color: darkyellow;">ff</span>lush(_reloc.stdout) 
+    iVar3 = sym.imp.fgets(&s, <span style="color: darkgreen;">0x20,</span> _reloc.stdin) 
+    if (iVar3 == 0) { 
+        sym.imp.puts("\nVerifi<span style="color: darkyellow;">ca</span>tion reject<span style="color: darkyellow;">ed</span>!") 
+        uVar4 = 0 
+    } else { 
+        iVar1 = sym.imp.strlen(&s) 
+        if (*(char *)((int64_t)&s + (uint64_t)(iVar1 - <span style="color: blue;">1))</span> == '\n') { 
+            *(un<span style="color: darkyellow;">de</span>fined *)((int64_t)&s + (uint64_t)(iVar1 - <span style="color: blue;">1))</span> = 0 
+            iVar2 = (iVar1 - <span style="color: blue;">1U)</span> * 8 + 1 
+            arg2 = (char *)sym.imp.malloc(iVar2) 
+            if (arg2 == (char *)0x0) { 
+                uVar4 = 1 
+            } else { 
+                sym.imp.memset(arg2, 0, iVar2) 
+                var_<span style="color: darkyellow;">44</span>h = 0 
+                while (var_44h < iVar1 - <span style="color: blue;">1U)</span> { 
+                    sym.hash((int32_t)*(char *)((int64_t)&s + (int<span style="color: darkyellow;">64</span>_t)(int32_t)var_<span style="color: darkyellow;">44</span>h), arg2) 
+                    var_<span style="color: darkyellow;">44</span>h = var_<span style="color: darkyellow;">44</span>h + 1 
+                } 
+                iVar1 = sym.imp.strcmp(arg2,  
+                                       "b<span style="color: darkyellow;">98</span><span style="color: darkyellow;">50</span><span style="color: darkyellow;">b3</span><span style="color: darkyellow;">43</span><span style="color: darkyellow;">b9</span><span style="color: darkyellow;">e9</span><span style="color: darkyellow;">36</span><span style="color: darkyellow;">db</span><span style="color: darkyellow;">98</span><span style="color: darkyellow;">50</span><span style="color: darkyellow;">b3</span><span style="color: darkyellow;">4c</span><span style="color: darkyellow;">5d</span><span style="color: darkyellow;">42</span><span style="color: darkyellow;">e2</span><span style="color: darkyellow;">04</span><span style="color: darkyellow;">31</span><span style="color: darkyellow;">b4</span><span style="color: darkyellow;">15</span><span style="color: darkyellow;">79</span><span style="color: darkyellow;">75</span><span style="color: darkyellow;">46</span><span style="color: darkyellow;">7a</span><span style="color: darkyellow;">ee</span><span style="color: darkyellow;">4d</span><span style="color: darkyellow;">47</span><span style="color: darkyellow;">93</span><span style="color: darkyellow;">5b</span><span style="color: darkyellow;">3d</span><span style="color: darkyellow;">72</span><span style="color: darkyellow;">55</span><span style="color: darkyellow;">a3</span><span style="color: darkyellow;">1c</span><span style="color: darkyellow;">cb</span><span style="color: darkyellow;">d0</span><span style="color: darkyellow;">38</span><span style="color: darkyellow;">43</span><span style="color: darkyellow;">8f</span><span style="color: darkyellow;">ff</span><span style="color: darkyellow;">8c</span><span style="color: darkyellow;">48</span><span style="color: darkyellow;">3c</span><span style="color: darkyellow;">ce</span><span style="color: darkyellow;">f8</span><span style="color: darkyellow;">0e</span><span style="color: darkyellow;">c0</span><span style="color: darkyellow;">8d</span><span style="color: darkyellow;">64</span><span style="color: darkyellow;">cc</span><span style="color: darkyellow;">a7</span><span style="color: darkyellow;">ad</span><span style="color: darkyellow;">8e</span><span style="color: darkyellow;">b0</span><span style="color: darkyellow;">54</span><span style="color: darkyellow;">2b</span>a" 
+                                      ) 
+                if (iVar1 == 0) { 
+                    sym.imp.printf("\nSu<span style="color: darkyellow;">cc</span>essfully verifi<span style="color: darkyellow;">ed</span>!\n\nUMDCTF-{%s}\n", <span style="color: blue;">&s)</span> 
+                    sym.imp.fr<span style="color: darkyellow;">ee</span>(arg2) 
+                    uVar4 = 0 
+                } else { 
+                    sym.imp.puts("\nVerifi<span style="color: darkyellow;">ca</span>tion reject<span style="color: darkyellow;">ed</span>!") 
+                    sym.imp.fr<span style="color: darkyellow;">ee</span>(arg2) 
+                    uVar4 = 0 
+                } 
+            } 
+        } else { 
+            sym.imp.puts("\nVerifi<span style="color: darkyellow;">ca</span>tion reject<span style="color: darkyellow;">ed</span>!") 
+            uVar4 = 0 
+        } 
+    } 
+    if (canary != *(int64_t *)(in_FS_O<span style="color: darkyellow;">FF</span>SET + <span style="color: darkgreen;">0x28))</span> { 
+        uVar4 = sym.imp.__st<span style="color: darkyellow;">ac</span>k_chk_<span style="color: darkyellow;">fa</span>il() 
+    } 
+    return uVar4 
+} 
+ 
+</code></pre>
+<p></p>
+<h3>Behavior</h3>
+<p>Description goes here.</p>
+<pre><code> 
+</code></pre>
+<p></p>
+<h3>Removal</h3>
+<p>Description goes here.</p>
+<p></p>
+</article>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+          content.style.maxHeight = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+        } 
+      });
+    }
+    </script>
+
+<!-- Pie chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script>
+    var ctx = document.getElementById('functionSizes').getContext('2d');
+    var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ['Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function', 'Function'],
+        datasets: [
+        {
+            label: 'Function Size (x1)',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            //data: [20, 10, 5, 2, 20, 30, 45, 0]
+            data: [59, 69, 78, 681, 111, 285, 177, 167, 128, 221, 381, 106, 38, 13, 89, 18, 46, 2082, 2567, 2283, 320, 343, 333, 204, 787]
+        },
+        {
+            label: 'Calls (x100)',
+            backgroundColor: 'rgb(99, 255, 132)',
+            borderColor: 'rgb(99, 255, 132)',
+            //data: [20, 10, 5, 2, 20, 30, 45, 0]
+            data: [38, 13, 89, 18, 46, 423, 243, 432, 320, 343, 555, 204, 787, 59, 69, 78, 222, 111, 285, 177, 167, 128, 221, 381, 106]
+        },
+        {
+            label: 'xRefs (x100)',
+            backgroundColor: 'rgb(132, 99, 255)',
+            borderColor: 'rgb(132, 99, 255)',
+            //data: [20, 10, 5, 2, 20, 30, 45, 0]
+            data: [111, 222, 333, 320, 343, 222, 204, 787, 59, 69, 78, 111, 111, 285, 177, 167, 128, 221, 111, 106, 38, 13, 89, 18, 46]
+        },
+        ]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+    var ctx2 = document.getElementById('sectionSizes').getContext('2d');
+
+    var myDoughnutChart = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+        datasets: [{
+            data: [15, 30, 55],
+            backgroundColor: [
+                'rgb(132, 99, 255)',
+                'rgb(99, 255, 132)',
+                'rgb(255, 99, 132)',
+                'rgb(132, 99, 255)',
+                'rgb(99, 255, 132)',
+                'rgb(255, 99, 132)',
+			],
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+            'LINKEDIT',
+            'DATA',
+            'TEXXT'
+        ]
+    },
+        options: {}
+    });
+</script>
+
+
+
+
+
+<!--
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+-->

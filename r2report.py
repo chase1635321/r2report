@@ -12,52 +12,148 @@ import r2pipe
 import os
 from termcolor import colored
 
-# Add command to access old mounting commands
-
 r = r2pipe.open()
-
 
 def r2report(_):
     """Build the plugin"""
-    title = "Malware Report"
-    installationtext = "This malware is a standalone executable. It might be dropped via a drive by download, manually installed on the computer, or act as a payload."
-    behaviortext = "This malware waits until january 1, 2100 and then attempts a DDOS attack on malwareanalysisbook.com"
-    persistencetext = "The malware sets itself up as a service named MalService."
-    removaltext = "This malware can be detected using a mutext named HGL345 and the service Malservice. It can then be removed by uninstalling the service and rebooting."
-
-    lines = []
 
     binary = r.cmdj("ij")["core"]["file"]
+    lines = []
 
     def process(command):
         """Process commands here"""
         global lines
 
         if not command.startswith("R"): 
-		return 0
-        if command == "Ro":
+            return 0
+
+        r.cmd("e scr.color = 0")
+
+        if command == "Ri":
             try:
-                generateReport()
+                os.system("cp template.md report.md")
+                print("Initialized report.md")
             except Exception as e:
                 print(e)
         elif command == "Re":
             try:
-                string_printer()
+                os.system("vim report.md")
             except Exception as e:
                 print(e)
-        elif command == "rsa":
+        elif command == "Rp":
             try:
-                string_identifier()
+                os.system("cat report.md")
+            except Exception as e:
+                print(e)
+        elif command == "Rw":
+            try:
+                writeReport()
+            except Exception as e:
+                print(e)
+        elif command == "Ro":
+            try:
+                os.system("gnome-open report.html &")
             except Exception as e:
                 print(e)
         else:
             print("| R                  " + colored("print this help menu", "green"))
-            print("| Re                 " + colored("generate report", "green"))
-            print("| Rp                 " + colored("Print the report", "green"))
-            print("| Rw                 " + colored("Write the report to an html file", "green"))
-            # Command to iterate through all, strings, 
+            print("| Ri                 " + colored("initialize report with template specified in template.md", "green"))
+            print("| Re                 " + colored("edit the report", "green"))
+            print("| Rp                 " + colored("print the report", "green"))
+            print("| Rw                 " + colored("prite the report to report.html", "green"))
+            print("| Ro                 " + colored("open report.html in browser", "green"))
+
+        r.cmd("e scr.color = 3")
 
         return 1
+
+    def writeReport():
+        global lines
+
+        print("Writing report")
+
+        lines = []
+        data = ""
+        with open("template.html") as f:
+            data = f.read()
+
+        addLine = True
+        for line in data.split("\n"):
+            if "<article>" in line:
+                addLine = False
+                lines.append("<article>")
+                generateReport()
+            if "</article>" in line:
+                addLine = True
+            if addLine:
+                lines.append(line)
+
+        with open("report.html", "w+") as f:
+            f.write("\n".join(lines))
+
+    def generateReport():
+        global lines
+        data = ""
+        with open("report.md") as f:
+            data = f.read()
+
+        for line in data.split("\n"):
+            if line.startswith("# "):
+                lines.append("<h1>" + line[2:] + "</h1>")
+            elif line.startswith("## "):
+                lines.append("<h2>" + line[3:] + "</h2>")
+            elif line.startswith("### "):
+                lines.append("<h3>" + line[4:] + "</h3>")
+            elif line.startswith("#### "):
+                lines.append("<h4>" + line[5:] + "</h4>")
+            elif line.startswith("!"):
+                lines.append("<pre><code>" + getCode(line[1:]) + "</code></pre>")
+            elif line.startswith("---"):
+                lines.append("<hr>")
+            elif line.startswith("$"):
+                lines.append("<p>" + line + "</p>")
+            else:
+                lines.append("<p>" + line + "</p>")
+
+    def getCode(command):
+        data = r.cmd(command)
+        output = ""
+        for line in data.split("\n"):
+            lastwascall = False
+            if not " ;-- " in line and not " ; var " in line and not "// WARNING: [r2ghidra]" in line:
+                for word in line.split(";")[0].split(" "):
+                    if str(word).startswith("0x"):
+                        output += "<span style=\"color: darkgreen;\">" + str(word) + "</span> "
+                    elif lastwascall:
+                        output += "<span style=\"color: green;\"><b>" + word + "</b></span> "
+                        lastwascall = False
+                    elif len(word) == 3 and not "-" in word:
+                        output += "<span style=\"color: blue;\">" + str(word) + "</span> "
+                    elif len(word.replace(",", "")) == 3 and not "-" in word:
+                        output += "<span style=\"color: blue;\">" + str(word[:3]) + "</span>, "
+                    elif "call" in word:
+                        output += "<span style=\"color: green;\"><b>" + word + "</b></span> "
+                        lastwascall = True
+                    elif "str." in word:
+                        output += "<span style=\"color: red;\">" + word + "</span> "
+                    elif len(word) > 0 and word[0] == "[" and word[-1] == "]":
+                        output += "[<span style=\"color: red;\">" + word[1:-1] + "</span>] "
+                    else:
+                        n = 2
+                        pairs = [word[i:i+n] for i in range(0, len(word), n)]
+                        for pair in pairs:
+                            try:
+                                temp = int(pair, 16)
+                                if len(pair) != 2:
+                                    pair += 2 # Throws error
+                                output += "<span style=\"color: darkyellow;\">" + pair + "</span>"
+                            except:
+                                output += pair
+                        output += " "
+                output += "\n"
+
+        return output
+
 
     return {"name": "r2report",
             "licence": "GPLv3",
