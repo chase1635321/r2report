@@ -110,8 +110,22 @@ def r2report(_):
                 lines.append("<pre><code>" + getCode(line[1:]) + "</code></pre>")
             elif line.startswith("---"):
                 lines.append("<hr>")
-            elif line.startswith("$"):
-                lines.append("<p>" + line + "</p>")
+            elif "$appendix" in line:
+                lines.append("<hr>")
+                lines.append("<h2>Appendix</h2>")
+
+                lines.append("<h3>File Information</h3>")
+                addCollapsible("Show sections", "<pre>" + r.cmd("iS").replace("\n", "<br>") + "</pre>")
+                addCollapsible("Show file info", "<pre>" + r.cmd("i").replace("\n", "<br>") + "</pre>")
+                addCollapsible("Show hashes", "<pre>" + r.cmd("it").replace("\n", "<br>") + "</pre>")
+
+                lines.append("<h3>Functions</h3>")
+                addCollapsible("Show function offsets", "<pre>" + r.cmd("aflt").replace("\n", "<br>") + "</pre>")
+
+                lines.append("<h3>Data references</h3>")
+                addCollapsible("Show import list", "<pre>" + r.cmd("ii").replace("\n", "<br>") + "</pre>")
+                addCollapsible("Show export list", "<pre>" + r.cmd("iE").replace("\n", "<br>") + "</pre>")
+                addCollapsible("Show string list", "<pre>" + r.cmd("izz").replace("\n", "<br>") + "</pre>")
             else:
                 lines.append("<p>" + line + "</p>")
 
@@ -154,12 +168,15 @@ def r2report(_):
 
         return output
 
+    def addCollapsible(title, text):
+        global lines
+        lines.append("""<button class="collapsible">""" + title + """</button><div class="content"><p>""" + text + """</p></div>""")
+
 
     return {"name": "r2report",
             "licence": "GPLv3",
             "desc": "A plugin that generates reports from r2 projects",
             "call": process}
-
 
 # Register the plugin
 if not r2lang.plugin("core", r2report):
