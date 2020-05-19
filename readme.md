@@ -10,6 +10,7 @@ A radare2 plugin to generate malware reports from projects.
 - Panels like these: https://mdbootstrap.com/docs/jquery/components/panels/
 - Color highlight certain things
 - Visual circle/pie graphs with relative section sizes and function sizes
+- Add virustotal results to the top
 
 ## Command structure
 - Re: Report edit
