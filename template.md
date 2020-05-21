@@ -27,5 +27,27 @@ $fileinfo$
 
 Description here.
 
-$dropdown|Show Important Functions|Description here$
+### Function Information
 
+$functiongraph
+
+---
+
+## Analysis
+### Infection Method
+Description goes here.
+!pds @ main
+
+### Persistence
+Description goes here.
+!pdi 30 @ main
+
+### Behavior
+Description goes here.
+!pdf~call @ main
+
+### Removal
+Description goes here.
+
+### Appendix goes here
+$appendix

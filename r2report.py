@@ -110,6 +110,17 @@ def r2report(_):
                 lines.append("<pre><code>" + getCode(line[1:]) + "</code></pre>")
             elif line.startswith("---"):
                 lines.append("<hr>")
+            elif line.startswith("$functiongraph"):
+                addFunctionGraph()
+            elif line.startswith("$dropdown"):
+                arr = line.split("|")
+                contents = ""
+                for l in arr[2:]:
+                    if l.startswith("!"):
+                        contents += "<pre><code>" + getCode(l[1:]) + "</code></pre>\n"
+                    else:
+                        contents += "<p>" + l + "</p>"
+                addCollapsible(arr[1], contents)
             elif "$appendix" in line:
                 lines.append("<hr>")
                 lines.append("<h2>Appendix</h2>")
@@ -171,6 +182,70 @@ def r2report(_):
     def addCollapsible(title, text):
         global lines
         lines.append("""<button class="collapsible">""" + title + """</button><div class="content"><p>""" + text + """</p></div>""")
+
+    def addFunctionGraph():
+        global lines
+        lines.append("<canvas id=\"functionSizes\"></canvas>")
+
+        labelText = ""
+        sizesText = ""
+        callsText = ""
+        xrefsText = ""
+
+        for func in r.cmdj("aflj"):
+            if not ".imp." in str(func["name"]):
+                labelText += "\'" + str(func["name"].replace("sym.", "")) + "\'" + ", "
+                sizesText += str(func["size"]) + ", "
+                callsText += str(100*func["outdegree"]) + ", "
+                xrefsText += str(100*func["indegree"]) + ", "
+
+                #labelText += "\'Function\', "
+                #sizesText += "30, "
+                #callsText += "20, "
+                #xrefsText += "50, "
+
+        labelText = labelText[:-2]
+        sizesText = sizesText[:-2]
+        callsText = callsText[:-2]
+        xrefsText = xrefsText[:-2]
+
+        data = """
+        <script>
+    var ctx = document.getElementById('functionSizes').getContext('2d');
+    var chart = new Chart(ctx, {
+    type: 'line',
+
+    data: {
+        labels: [""" + labelText + """],
+        datasets: [
+        {
+            label: 'Function Size (x1)',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(245, 89, 122)',
+            data: [""" + sizesText + """]
+        },
+        {
+            label: 'Calls (x100)',
+            backgroundColor: 'rgb(99, 255, 132)',
+            borderColor: 'rgb(89, 245, 122)',
+            data: [""" + callsText + """]
+        },
+        {
+            label: 'xRefs (x100)',
+            backgroundColor: 'rgb(132, 99, 255)',
+            borderColor: 'rgb(122, 89, 245)',
+            data: [""" + xrefsText + """]
+        },
+        ]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>
+        """
+        lines.append("<script src=\"https://cdn.jsdelivr.net/npm/chart.js@2.8.0\"></script>")
+        lines.append(data)
 
 
     return {"name": "r2report",

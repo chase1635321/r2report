@@ -27,6 +27,10 @@ $fileinfo$
 
 Description here.
 
+### Function Information
+
+$functiongraph
+
 ---
 
 ## Analysis

@@ -164,25 +164,75 @@
 <p></p>
 <p>Description here.</p>
 <p></p>
+<h3>Function Information</h3>
+<p></p>
+<canvas id="functionSizes"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+        <script>
+    var ctx = document.getElementById('functionSizes').getContext('2d');
+    var chart = new Chart(ctx, {
+    type: 'line',
+
+    data: {
+        labels: ['entry0', 'deregister_tm_clones', 'register_tm_clones', '__do_global_dtors_aux', 'entry.init0', '__libc_csu_fini', '_fini', 'hash', '__libc_csu_init', 'main', '_init'],
+        datasets: [
+        {
+            label: 'Function Size (x1)',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [41, 50, 58, 28, 38, 2, 9, 382, 101, 410, 26]
+        },
+        {
+            label: 'Calls (x100)',
+            backgroundColor: 'rgb(99, 255, 132)',
+            borderColor: 'rgb(99, 255, 132)',
+            data: [100, 0, 0, 100, 0, 0, 0, 300, 100, 1500, 100]
+        },
+        {
+            label: 'xRefs (x100)',
+            backgroundColor: 'rgb(132, 99, 255)',
+            borderColor: 'rgb(132, 99, 255)',
+            data: [0, 300, 400, 100, 200, 0, 0, 1000, 200, 1100, 200]
+        },
+        ]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>
+        
+<p></p>
 <hr>
 <p></p>
 <h2>Analysis</h2>
 <h3>Infection Method</h3>
 <p>Description goes here.</p>
-<pre><code> 
+<pre><code><span style="color: darkgreen;">0x004008ed</span> const char *format 
 <span style="color: darkgreen;">0x004008ed</span> <span style="color: red;">str.Verify_yourself:</span> 
 <span style="color: darkgreen;">0x004008f7</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.printf</b></span> 
-<span style="color: darkgreen;">0x004008fc</span> obj.__TMC_END 
 <span style="color: darkgreen;">0x00602090</span> [<span style="color: red;">26</span>] -rw- section size <span style="color: darkyellow;">32</span> named .bss 
+<span style="color: darkgreen;">0x00400903</span> FILE *str<span style="color: darkyellow;">ea</span>m 
 <span style="color: darkgreen;">0x00400906</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.fflush</b></span> 
+<span style="color: darkgreen;">0x0040090b</span> FILE *str<span style="color: darkyellow;">ea</span>m 
 <span style="color: darkgreen;">0x0040090b</span> obj.stdin__GLI<span style="color: darkyellow;">BC</span>_2.2.5 
+<span style="color: darkgreen;">0x00400916</span> <span style="color: blue;">int</span> size 
+<span style="color: darkgreen;">0x0040091b</span> char *s 
 <span style="color: darkgreen;">0x0040091e</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.fgets</b></span> 
+<span style="color: darkgreen;">0x00400928</span> const char *s 
 <span style="color: darkgreen;">0x00400928</span> <span style="color: red;">str.Verification_rejected</span> 
 <span style="color: darkgreen;">0x0040092d</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.puts</b></span> 
+<span style="color: darkgreen;">0x00400940</span> const char *s 
 <span style="color: darkgreen;">0x00400943</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.strlen</b></span> 
+<span style="color: darkgreen;">0x0040095c</span> const char *s 
 <span style="color: darkgreen;">0x0040095c</span> <span style="color: red;">str.Verification_rejected</span> 
 <span style="color: darkgreen;">0x00400961</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.puts</b></span> 
+<span style="color: darkgreen;">0x00400990</span> size_t size 
 <span style="color: darkgreen;">0x00400993</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.malloc</b></span> 
+<span style="color: darkgreen;">0x004009ad</span> size_t n 
+<span style="color: darkgreen;">0x004009b4</span> <span style="color: blue;">int</span> c 
+<span style="color: darkgreen;">0x004009b9</span> void *s 
 <span style="color: darkgreen;">0x004009bc</span> <span style="color: green;"><b>call</b></span> <span style="color: green;"><b>sym.imp.memset</b></span> 
  
 </code></pre>
@@ -239,7 +289,7 @@
 <button class="collapsible">Show file info</button><div class="content"><p><pre>fd       3<br>file     hashmenot<br>size     0x3440<br>humansz  13.1K<br>mode     r-x<br>format   elf64<br>iorw     false<br>blksz    0x0<br>block    0x100<br>type     EXEC (Executable file)<br>arch     x86<br>baddr    0x400000<br>binsz    11391<br>bintype  elf<br>bits     64<br>canary   true<br>class    ELF64<br>compiler GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609<br>crypto   false<br>endian   little<br>havecode true<br>intrp    /lib64/ld-linux-x86-64.so.2<br>laddr    0x0<br>lang     c<br>linenum  true<br>lsyms    true<br>machine  AMD x86-64 architecture<br>maxopsz  16<br>minopsz  1<br>nx       true<br>os       linux<br>pcalign  0<br>pic      false<br>relocs   true<br>relro    partial<br>rpath    NONE<br>sanitiz  false<br>static   false<br>stripped false<br>subsys   linux<br>va       true<br><br></pre></p></div>
 <button class="collapsible">Show hashes</button><div class="content"><p><pre>md5 460bd4b9539e3e2b74c484814814b3a1<br>sha1 9448588b4291a46ce4c59e762a12b2a229c33163<br>sha256 5fe7baf9ff2f61f11b897af288c6903a401b00b3807a09cd3e280c784df374bd<br></pre></p></div>
 <h3>Functions</h3>
-<button class="collapsible">Show function offsets</button><div class="content"><p><pre></pre></p></div>
+<button class="collapsible">Show function offsets</button><div class="content"><p><pre>┌─────────────────────────────────────────────────────────────────────────────────┐<br>│ addr        │ size  │ name                       │ nbbs  │ xref  │ calls  │ cc  │<br>│─────────────────────────────────────────────────────────────────────────────────│<br>│ 0x004007e0  │ 41    │ entry0                     │ 1     │ 0     │ 1      │ 1   │<br>│ 0x00400770  │ 6     │ sym.imp.__libc_start_main  │ 1     │ 1     │ 0      │ 1   │<br>│ 0x00400810  │ 50    │ sym.deregister_tm_clones   │ 4     │ 3     │ 0      │ 4   │<br>│ 0x00400850  │ 58    │ sym.register_tm_clones     │ 4     │ 4     │ 0      │ 4   │<br>│ 0x00400890  │ 28    │ sym.__do_global_dtors_aux  │ 3     │ 1     │ 1      │ 2   │<br>│ 0x004008b0  │ 38    │ entry.init0                │ 4     │ 2     │ 0      │ 2   │<br>│ 0x00400c60  │ 2     │ sym.__libc_csu_fini        │ 1     │ 1     │ 0      │ 1   │<br>│ 0x00400c64  │ 9     │ sym._fini                  │ 1     │ 0     │ 0      │ 1   │<br>│ 0x00400a70  │ 382   │ sym.hash                   │ 15    │ 10    │ 3      │ 7   │<br>│ 0x00400bf0  │ 101   │ sym.__libc_csu_init        │ 4     │ 3     │ 1      │ 3   │<br>│ 0x004008d6  │ 410   │ main                       │ 15    │ 12    │ 11     │ 8   │<br>│ 0x004006d0  │ 26    │ sym._init                  │ 3     │ 2     │ 1      │ 2   │<br>│ 0x00400700  │ 6     │ sym.imp.free               │ 1     │ 2     │ 0      │ 1   │<br>│ 0x00400710  │ 6     │ sym.imp.puts               │ 1     │ 3     │ 0      │ 1   │<br>│ 0x00400720  │ 6     │ sym.imp.strlen             │ 1     │ 1     │ 0      │ 1   │<br>│ 0x00400730  │ 6     │ sym.imp.__stack_chk_fail   │ 1     │ 2     │ 0      │ 1   │<br>│ 0x00400740  │ 6     │ sym.imp.printf             │ 1     │ 2     │ 0      │ 1   │<br>│ 0x00400750  │ 6     │ sym.imp.memset             │ 1     │ 1     │ 0      │ 1   │<br>│ 0x00400760  │ 6     │ sym.imp.strncat            │ 1     │ 1     │ 0      │ 1   │<br>│ 0x00400780  │ 6     │ sym.imp.fgets              │ 1     │ 1     │ 0      │ 1   │<br>│ 0x00400790  │ 6     │ sym.imp.strcmp             │ 1     │ 1     │ 0      │ 1   │<br>│ 0x004007a0  │ 6     │ sym.imp.malloc             │ 1     │ 1     │ 0      │ 1   │<br>│ 0x004007b0  │ 6     │ sym.imp.fflush             │ 1     │ 1     │ 0      │ 1   │<br>│ 0x004007c0  │ 6     │ sym.imp.sprintf            │ 1     │ 1     │ 0      │ 1   │<br>└─────────────────────────────────────────────────────────────────────────────────┘<br><br></pre></p></div>
 <h3>Data references</h3>
 <button class="collapsible">Show import list</button><div class="content"><p><pre>[Imports]<br>nth vaddr      bind   type   lib name<br>―――――――――――――――――――――――――――――――――――――<br>1   0x00400700 GLOBAL FUNC       free<br>2   0x00400710 GLOBAL FUNC       puts<br>3   0x00400720 GLOBAL FUNC       strlen<br>4   0x00400730 GLOBAL FUNC       __stack_chk_fail<br>5   0x00400740 GLOBAL FUNC       printf<br>6   0x00400750 GLOBAL FUNC       memset<br>7   0x00400760 GLOBAL FUNC       strncat<br>8   0x00400770 GLOBAL FUNC       __libc_start_main<br>9   0x00400780 GLOBAL FUNC       fgets<br>10  0x00400790 GLOBAL FUNC       strcmp<br>11  0x00000000 WEAK   NOTYPE     __gmon_start__<br>12  0x004007a0 GLOBAL FUNC       malloc<br>13  0x004007b0 GLOBAL FUNC       fflush<br>14  0x004007c0 GLOBAL FUNC       sprintf<br><br><br></pre></p></div>
 <button class="collapsible">Show export list</button><div class="content"><p><pre>[Exports]<br><br>nth paddr       vaddr      bind   type   size lib name<br>――――――――――――――――――――――――――――――――――――――――――――――――――――――<br>15   ---------- 0x00602090 GLOBAL OBJ    8        stdout<br>16   ---------- 0x006020a0 GLOBAL OBJ    8        stdin<br>47   0x00000c60 0x00400c60 GLOBAL FUNC   2        __libc_csu_fini<br>50   ---------- 0x00602090 GLOBAL OBJ    8        stdout@@GLIBC_2.2.5<br>53   ---------- 0x006020a0 GLOBAL OBJ    8        stdin@@GLIBC_2.2.5<br>54   ---------- 0x00602090 GLOBAL NOTYPE 0        _edata<br>55   0x00000c64 0x00400c64 GLOBAL FUNC   0        _fini<br>58   0x00000a70 0x00400a70 GLOBAL FUNC   382      hash<br>64   0x00002080 0x00602080 GLOBAL NOTYPE 0        __data_start<br>67   0x00002088 0x00602088 GLOBAL OBJ    0        __dso_handle<br>68   0x00000c70 0x00400c70 GLOBAL OBJ    4        _IO_stdin_used<br>69   0x00000bf0 0x00400bf0 GLOBAL FUNC   101      __libc_csu_init<br>72   ---------- 0x006020b0 GLOBAL NOTYPE 0        _end<br>73   0x000007e0 0x004007e0 GLOBAL FUNC   42       _start<br>74   ---------- 0x00602090 GLOBAL NOTYPE 0        __bss_start<br>75   0x000008d6 0x004008d6 GLOBAL FUNC   410      main<br>78   ---------- 0x00602090 GLOBAL OBJ    0        __TMC_END__<br>80   0x000006d0 0x004006d0 GLOBAL FUNC   0        _init<br><br></pre></p></div>
@@ -264,8 +314,9 @@
     </script>
 
 <!-- Pie chart -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
+<!--
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
     var ctx = document.getElementById('functionSizes').getContext('2d');
     var chart = new Chart(ctx, {
@@ -303,6 +354,10 @@
     // Configuration options go here
     options: {}
 });
+</script>
+-->
+
+<script>
     var ctx2 = document.getElementById('sectionSizes').getContext('2d');
 
     var myDoughnutChart = new Chart(ctx2, {
